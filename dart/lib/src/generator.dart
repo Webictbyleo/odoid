@@ -68,6 +68,7 @@ final class OdoIDGenerator {
   OdoIDGenerator({
     this.namespace = 'default',
     this.length = 6,
+    // epoch defaults to 0 to ensure absolute time-based seeding (distributed uniqueness).
     int epoch = 0,
   })  : _epoch = epoch,
         capacity = kMax[length] ?? _assertLength(length) {

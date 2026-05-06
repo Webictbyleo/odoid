@@ -57,9 +57,6 @@ func NewOdoIDGenerator(cfg GeneratorConfig) (*OdoIDGenerator, error) {
 	}
 
 	epoch := cfg.Epoch
-	if epoch == 0 {
-		epoch = time.Now().UnixMilli()
-	}
 
 	return &OdoIDGenerator{
 		Namespace: cfg.Namespace,

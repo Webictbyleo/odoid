@@ -1,3 +1,8 @@
+## 1.0.1
+
+- Fix: Changed default generator behavior from relative to absolute time to prevent deterministic generation in short-lived instances.
+- Re-synced specification and all implementations to 1.0.1.
+
 ## 1.0.0
 
 - Initial release.

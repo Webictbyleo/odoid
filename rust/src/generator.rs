@@ -78,7 +78,7 @@ impl OdoIDGenerator {
     /// Returns [`UnsupportedLengthError`] if `config.length` is not 6, 7, or 8.
     pub fn new(config: GeneratorConfig) -> Result<Self, UnsupportedLengthError> {
         assert_length(config.length)?;
-        let epoch = config.epoch.unwrap_or_else(now_ms);
+        let epoch = config.epoch.unwrap_or(0);
         Ok(Self {
             namespace: config.namespace,
             length: config.length,

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "odoid"
-version = "1.0.0"
+version = "1.0.1"
 description = "Deterministic mixed-radix ID encoding — maps integers to 6, 7, or 8-character alphanumeric strings."
 readme = "README.md"
 license = { text = "MIT" }

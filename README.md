@@ -37,7 +37,7 @@ encode(236223201279, 8) →  "ZZ9ZZZZZ"
 | Java | [`java/`](java/) | [![Maven Central](https://img.shields.io/maven-central/v/io.github.webictbyleo/odoid)](https://central.sonatype.com/artifact/io.github.webictbyleo/odoid) |
 | PHP | [`php/`](php/) | [![Packagist](https://img.shields.io/packagist/v/webictbyleo/odoid)](https://packagist.org/packages/webictbyleo/odoid) |
 | Dart | [`dart/`](dart/) | [![pub.dev](https://img.shields.io/pub/v/odoid)](https://pub.dev/packages/odoid) |
-| **CLI** | [`cli/`](cli/) | [![GitHub release](https://img.shields.io/github/v/release/Webictbyleo/odoid?filter=cli*)](https://github.com/Webictbyleo/odoid/releases/tag/cli%2Fv1.0.0) |
+| **CLI** | [`cli/`](cli/) | [![GitHub release](https://img.shields.io/github/v/release/Webictbyleo/odoid?filter=cli*)](https://github.com/Webictbyleo/odoid/releases/tag/cli%2Fv1.0.1) |
 
 ## Specification
 
@@ -47,16 +47,16 @@ The full processing instruction document is in [SPEC.md](SPEC.md). All implement
 
 ### CLI (no runtime required)
 
-Download the binary for your platform from the [latest CLI release](https://github.com/Webictbyleo/odoid/releases/tag/cli%2Fv1.0.0):
+Download the binary for your platform from the [latest CLI release](https://github.com/Webictbyleo/odoid/releases/tag/cli%2Fv1.0.1):
 
 | Platform | Binary |
 |----------|--------|
-| Linux x64 | [`odoid-linux-amd64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-linux-amd64) |
-| Linux ARM64 | [`odoid-linux-arm64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-linux-arm64) |
-| Windows x64 | [`odoid-windows-amd64.exe`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-windows-amd64.exe) |
-| Windows ARM64 | [`odoid-windows-arm64.exe`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-windows-arm64.exe) |
-| macOS x64 | [`odoid-darwin-amd64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-darwin-amd64) |
-| macOS Apple Silicon | [`odoid-darwin-arm64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-darwin-arm64) |
+| Linux x64 | [`odoid-linux-amd64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.1/odoid-linux-amd64) |
+| Linux ARM64 | [`odoid-linux-arm64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.1/odoid-linux-arm64) |
+| Windows x64 | [`odoid-windows-amd64.exe`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.1/odoid-windows-amd64.exe) |
+| Windows ARM64 | [`odoid-windows-arm64.exe`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.1/odoid-windows-arm64.exe) |
+| macOS x64 | [`odoid-darwin-amd64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.1/odoid-darwin-amd64) |
+| macOS Apple Silicon | [`odoid-darwin-arm64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.1/odoid-darwin-arm64) |
 
 ```sh
 # Linux / macOS
@@ -152,7 +152,7 @@ g.Next(); // OdoIDResult { Id = "...", N = ..., Length = 7, Namespace = "orders"
 
 ```toml
 [dependencies]
-odoid = "1.0.0"
+odoid = "1.0.1"
 ```
 
 ```rust
@@ -187,7 +187,7 @@ g:next()  -- { id = "...", n = ..., length = 7, namespace = "orders" }
 <dependency>
   <groupId>io.github.webictbyleo</groupId>
   <artifactId>odoid</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
@@ -222,7 +222,7 @@ $g->next(); // ['id' => '...', 'n' => ..., 'length' => 7, 'namespace' => 'orders
 
 ```yaml
 dependencies:
-  odoid: ^1.0.0
+  odoid: ^1.0.1
 ```
 
 ```dart

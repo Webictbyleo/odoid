@@ -27,7 +27,7 @@ public final class GeneratorConfig {
     public static final class Builder {
         private String namespace = "default";
         private int    length    = 6;
-        private long   epoch     = Instant.now().toEpochMilli();
+        private long   epoch     = 0L;
 
         public Builder namespace(String namespace) { this.namespace = namespace; return this; }
         public Builder length(int length)          { this.length    = length;    return this; }

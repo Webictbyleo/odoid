@@ -1,6 +1,6 @@
 # OdoID — Processing Instruction Specification
 
-**Version:** 1.0.0  
+**Version:** 1.0.1  
 **Date:** 2026-05-06  
 **Status:** Normative
 
@@ -208,7 +208,7 @@ Result: **`1234567`**
 |-----------|------|---------|-------------|
 | `namespace` | string | `"default"` | Logical partition for this generator instance. Different namespaces produce different output for the same tick. |
 | `length` | integer | `6` | OdoID length; must be one of `{6, 7, 8}`. |
-| `epoch` | integer (ms) | `Date.now()` at construction | Millisecond timestamp used as the time origin. Stored as a BigInt-compatible integer. |
+| `epoch` | integer (ms) | `0` | Millisecond timestamp used as the time origin. Stored as a BigInt-compatible integer. |
 
 ### 7.2 Internal State
 

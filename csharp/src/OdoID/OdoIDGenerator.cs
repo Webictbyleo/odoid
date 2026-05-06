@@ -56,9 +56,7 @@ public sealed class OdoIDGenerator
         Namespace = config.Namespace;
         Length = config.Length;
         Capacity = Charsets.Max[Length];
-        _epoch = config.Epoch == 0
-            ? DateTimeOffset.UtcNow.ToUnixTimeMilliseconds()
-            : config.Epoch;
+        _epoch = config.Epoch;
     }
 
     private long NowMs() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - _epoch;

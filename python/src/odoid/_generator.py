@@ -68,7 +68,7 @@ class OdoIDGenerator:
         self.namespace = namespace
         self.length = length
         self.capacity = MAX[length]
-        self.epoch = epoch if epoch is not None else _now_ms()
+        self.epoch = epoch if epoch is not None else 0
         self._sequence = 0
         self._last_tick = 0
 

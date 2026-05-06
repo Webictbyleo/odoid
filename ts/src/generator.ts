@@ -58,7 +58,7 @@ export class OdoIDGenerator {
   constructor({
     namespace = "default",
     length = 6,
-    epoch = Date.now(),
+    epoch = 0,
   }: OdoIDGeneratorOptions = {}) {
     assertLength(length);
     this.namespace = namespace;

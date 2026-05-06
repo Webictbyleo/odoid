@@ -1,8 +1,8 @@
 package = "odoid"
-version = "1.0.0-1"
+version = "1.0.1-1"
 source = {
   url = "git+https://github.com/Webictbyleo/odoid.git",
-  tag = "lua/v1.0.0",
+  tag = "lua/v1.0.1",
 }
 description = {
   summary  = "Deterministic mixed-radix ID encoding",

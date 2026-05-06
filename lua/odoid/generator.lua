@@ -37,7 +37,7 @@ function M.new(cfg)
   cfg = cfg or {}
   local namespace = cfg.namespace or "default"
   local length    = cfg.length or 6
-  local epoch     = cfg.epoch or now_ms()
+  local epoch     = cfg.epoch or 0
 
   local err = encode_m.assert_length(length)
   if err then return nil, err end

@@ -1,8 +1,6 @@
 package main
 
 import (
-	"crypto/rand"
-	"encoding/binary"
 	"flag"
 	"fmt"
 	"os"
@@ -12,7 +10,7 @@ import (
 	"github.com/Webictbyleo/odoid/go/odoid"
 )
 
-const version = "1.0.0"
+const version = "1.0.1"
 
 const usage = `odoid — deterministic mixed-radix ID encoding
 
@@ -142,47 +140,37 @@ func runGenerate(args []string) {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
 	}
-	capacity := odoid.Max[*length]
+	gen, err := odoid.NewOdoIDGenerator(odoid.GeneratorConfig{
+		Namespace: *ns,
+		Length:    *length,
+	})
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error creating generator: %v\n", err)
+		os.Exit(1)
+	}
 
 	w := os.Stdout
 	for i := 0; i < *count; i++ {
-		n, err := randUint64n(capacity)
+		res, err := gen.Next()
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "error generating random number: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error generating ID: %v\n", err)
 			os.Exit(1)
 		}
-		id, _ := odoid.Encode(n, *length) // capacity-bounded n never overflows
 		if *ids {
-			fmt.Fprintln(w, id)
+			fmt.Fprintln(w, res.ID)
 		} else {
 			label := *ns
 			if len(label) > 20 {
 				label = label[:17] + "..."
 			}
 			fmt.Fprintf(w, "%-*s  n=%-14d  length=%d  ns=%s\n",
-				*length, id, n, *length, label)
+				*length, res.ID, res.N, *length, label)
 		}
 	}
 
 	if !*ids && *count > 1 {
 		fmt.Fprintf(w, "\n%d IDs generated  namespace=%s  length=%d\n",
 			*count, *ns, *length)
-	}
-}
-
-// randUint64n returns a cryptographically random uint64 in [0, max).
-func randUint64n(max uint64) (uint64, error) {
-	for {
-		var raw uint64
-		if err := binary.Read(rand.Reader, binary.BigEndian, &raw); err != nil {
-			return 0, err
-		}
-		// Rejection sampling to avoid modulo bias.
-		// threshold = (2^64 - max) % max  — values below threshold are biased.
-		threshold := (-max) % max
-		if raw >= threshold {
-			return raw % max, nil
-		}
 	}
 }
 
