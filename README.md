@@ -37,12 +37,42 @@ encode(236223201279, 8) →  "ZZ9ZZZZZ"
 | Java | [`java/`](java/) | [![Maven Central](https://img.shields.io/maven-central/v/io.github.webictbyleo/odoid)](https://central.sonatype.com/artifact/io.github.webictbyleo/odoid) |
 | PHP | [`php/`](php/) | [![Packagist](https://img.shields.io/packagist/v/webictbyleo/odoid)](https://packagist.org/packages/webictbyleo/odoid) |
 | Dart | [`dart/`](dart/) | [![pub.dev](https://img.shields.io/pub/v/odoid)](https://pub.dev/packages/odoid) |
+| **CLI** | [`cli/`](cli/) | [![GitHub release](https://img.shields.io/github/v/release/Webictbyleo/odoid?filter=cli*)](https://github.com/Webictbyleo/odoid/releases/tag/cli%2Fv1.0.0) |
 
 ## Specification
 
 The full processing instruction document is in [SPEC.md](SPEC.md). All implementations are derived from and tested against this spec.
 
 ## Quick Start
+
+### CLI (no runtime required)
+
+Download the binary for your platform from the [latest CLI release](https://github.com/Webictbyleo/odoid/releases/tag/cli%2Fv1.0.0):
+
+| Platform | Binary |
+|----------|--------|
+| Linux x64 | [`odoid-linux-amd64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-linux-amd64) |
+| Linux ARM64 | [`odoid-linux-arm64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-linux-arm64) |
+| Windows x64 | [`odoid-windows-amd64.exe`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-windows-amd64.exe) |
+| Windows ARM64 | [`odoid-windows-arm64.exe`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-windows-arm64.exe) |
+| macOS x64 | [`odoid-darwin-amd64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-darwin-amd64) |
+| macOS Apple Silicon | [`odoid-darwin-arm64`](https://github.com/Webictbyleo/odoid/releases/download/cli%2Fv1.0.0/odoid-darwin-arm64) |
+
+```sh
+# Linux / macOS
+chmod +x odoid-linux-amd64
+./odoid-linux-amd64 encode 1234567           # 0D7NM7
+./odoid-linux-amd64 encode 1234567 --length 7  # 0A15NM7
+./odoid-linux-amd64 decode 0D7NM7           # 1234567
+./odoid-linux-amd64 generate --namespace orders --length 7 --count 5
+```
+
+```bat
+REM Windows
+odoid-windows-amd64.exe encode 1234567
+odoid-windows-amd64.exe decode 0D7NM7
+odoid-windows-amd64.exe generate --count 5 --ids-only
+```
 
 ### TypeScript / JavaScript
 
