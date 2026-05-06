@@ -130,3 +130,4 @@ final class OdoIDGenerator {
 // OdoId.assertLength throws first.
 Never _assertLength(int length) =>
     throw UnsupportedLengthException(length);
+// Independent versioning test
