@@ -36,6 +36,7 @@ encode(236223201279, 8) →  "ZZ9ZZZZZ"
 | Lua | [`lua/`](lua/) | [![LuaRocks](https://img.shields.io/luarocks/v/webictbyleo/odoid)](https://luarocks.org/modules/webictbyleo/odoid) |
 | Java | [`java/`](java/) | [![Maven Central](https://img.shields.io/maven-central/v/io.github.webictbyleo/odoid)](https://central.sonatype.com/artifact/io.github.webictbyleo/odoid) |
 | PHP | [`php/`](php/) | [![Packagist](https://img.shields.io/packagist/v/webictbyleo/odoid)](https://packagist.org/packages/webictbyleo/odoid) |
+| Dart | [`dart/`](dart/) | [![pub.dev](https://img.shields.io/pub/v/odoid)](https://pub.dev/packages/odoid) |
 
 ## Specification
 
@@ -185,6 +186,23 @@ OdoId::decode("0D7NM7");    // 1234567
 
 $g = new OdoIDGenerator(namespace: 'orders', length: 7);
 $g->next(); // ['id' => '...', 'n' => ..., 'length' => 7, 'namespace' => 'orders']
+```
+
+### Dart
+
+```yaml
+dependencies:
+  odoid: ^1.0.0
+```
+
+```dart
+import 'package:odoid/odoid.dart';
+
+OdoId.encode(1234567, 6);  // "0D7NM7"
+OdoId.decode('0D7NM7');    // 1234567
+
+final g = OdoIDGenerator(namespace: 'orders', length: 7);
+g.next(); // OdoIDResult(id: '...', n: ..., length: 7, namespace: 'orders')
 ```
 
 ## License
