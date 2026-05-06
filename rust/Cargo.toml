@@ -1,0 +1,16 @@
+[package]
+name = "odoid"
+version = "1.0.0"
+edition = "2021"
+authors = ["Webictbyleo"]
+description = "Deterministic mixed-radix ID encoding — maps integers to 6, 7, or 8-character alphanumeric strings. Ambiguous characters I, L, O are excluded."
+license = "MIT"
+repository = "https://github.com/Webictbyleo/odoid"
+homepage = "https://github.com/Webictbyleo/odoid"
+documentation = "https://docs.rs/odoid"
+keywords = ["id", "encoding", "serial", "deterministic"]
+categories = ["encoding", "data-structures"]
+rust-version = "1.65"
+readme = "README.md"
+
+[dependencies]
