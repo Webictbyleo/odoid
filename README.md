@@ -33,6 +33,7 @@ encode(236223201279, 8) →  "ZZ9ZZZZZ"
 | Go | [`go/`](go/) | `go get github.com/Webictbyleo/odoid/go/odoid` |
 | C# | [`csharp/`](csharp/) | [![NuGet](https://img.shields.io/nuget/v/OdoID)](https://www.nuget.org/packages/OdoID) |
 | Rust | [`rust/`](rust/) | [![crates.io](https://img.shields.io/crates/v/odoid)](https://crates.io/crates/odoid) |
+| Lua | [`lua/`](lua/) | [![LuaRocks](https://img.shields.io/luarocks/v/webictbyleo/odoid)](https://luarocks.org/modules/webictbyleo/odoid) |
 
 ## Specification
 
