@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net6.0;netstandard2.1</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+
+    <!-- NuGet package metadata -->
+    <PackageId>OdoID</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Webictbyleo</Authors>
+    <Description>Deterministic mixed-radix ID encoding — maps integers to 6, 7, or 8-character alphanumeric strings. Ambiguous characters I, L, O are excluded.</Description>
+    <PackageTags>id;encoding;mixed-radix;serial-number;deterministic</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Webictbyleo/odoid</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Webictbyleo/odoid.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Shims.cs" Condition="$(TargetFramework) != 'netstandard2.1'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
