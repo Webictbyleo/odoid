@@ -2,7 +2,14 @@
   "name": "odoid",
   "version": "1.0.0",
   "description": "Deterministic mixed-radix ID encoding — maps 64-bit unsigned integers to 6, 7, or 8-character alphanumeric strings.",
-  "keywords": ["id", "encoding", "mixed-radix", "serial-number", "bigint", "deterministic"],
+  "keywords": [
+    "id",
+    "encoding",
+    "mixed-radix",
+    "serial-number",
+    "bigint",
+    "deterministic"
+  ],
   "license": "MIT",
   "author": "",
   "type": "module",
@@ -46,7 +53,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Webictbyleo/odoid.git",
+    "url": "git+https://github.com/Webictbyleo/odoid.git",
     "directory": "ts"
   },
   "homepage": "https://github.com/Webictbyleo/odoid/tree/main/ts#readme",

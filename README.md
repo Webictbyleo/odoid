@@ -29,8 +29,8 @@ encode(236223201279, 8) →  "ZZ9ZZZZZ"
 | Language | Directory | Package |
 |----------|-----------|---------|
 | TypeScript / JavaScript | [`ts/`](ts/) | [![npm](https://img.shields.io/npm/v/odoid)](https://www.npmjs.com/package/odoid) |
-| Python | `python/` | *(coming soon)* |
-| Go | `go/` | *(coming soon)* |
+| Python | [`python/`](python/) | [![PyPI](https://img.shields.io/pypi/v/odoid)](https://pypi.org/project/odoid/) |
+| Go | [`go/`](go/) | `go get github.com/Webictbyleo/odoid/go/odoid` |
 | C# | `csharp/` | *(coming soon)* |
 
 ## Specification
