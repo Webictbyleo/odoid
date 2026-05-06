@@ -32,7 +32,6 @@ venv/
 env/
 .env
 *.egg-info/
-dist/
 build/
 .pytest_cache/
 .mypy_cache/
@@ -63,17 +62,37 @@ TestResults/
 # ──────────────────────────────────────────────
 # Java / Kotlin
 # ──────────────────────────────────────────────
-target/
+java/target/
+java/.gradle/
+java/build/
 *.class
 *.jar
 *.war
+*.iml
 .gradle/
-build/
+
+# ──────────────────────────────────────────────
+# Lua
+# ──────────────────────────────────────────────
+lua_modules/
+.luarocks/
+*.src.rock
 
 # ──────────────────────────────────────────────
 # Rust
 # ──────────────────────────────────────────────
-target/
+rust/target/
+
+# ──────────────────────────────────────────────
+# PHP
+# ──────────────────────────────────────────────
+php/vendor/
+php/build/
+.phpunit.result.cache
+.phpunit.cache/
+php_cs_fixer_cache
+.php-cs-fixer.cache
+*.phar
 
 # ──────────────────────────────────────────────
 # Misc
