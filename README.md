@@ -32,6 +32,7 @@ encode(236223201279, 8) →  "ZZ9ZZZZZ"
 | Python | [`python/`](python/) | [![PyPI](https://img.shields.io/pypi/v/odoid)](https://pypi.org/project/odoid/) |
 | Go | [`go/`](go/) | `go get github.com/Webictbyleo/odoid/go/odoid` |
 | C# | [`csharp/`](csharp/) | [![NuGet](https://img.shields.io/nuget/v/OdoID)](https://www.nuget.org/packages/OdoID) |
+| Rust | [`rust/`](rust/) | [![crates.io](https://img.shields.io/crates/v/odoid)](https://crates.io/crates/odoid) |
 
 ## Specification
 
