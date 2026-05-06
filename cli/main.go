@@ -1,6 +1,8 @@
 package main
 
 import (
+	"crypto/rand"
+	"encoding/binary"
 	"flag"
 	"fmt"
 	"os"
@@ -119,7 +121,7 @@ func runDecode(args []string) {
 
 func runGenerate(args []string) {
 	fs := flag.NewFlagSet("generate", flag.ExitOnError)
-	ns := fs.String("namespace", "default", "generator namespace")
+	ns := fs.String("namespace", "default", "generator namespace (informational label only)")
 	length := fs.Int("length", 6, "OdoID length: 6, 7, or 8")
 	count := fs.Int("count", 1, "number of IDs to generate")
 	ids := fs.Bool("ids-only", false, "print only the ID strings, one per line")
@@ -135,37 +137,52 @@ func runGenerate(args []string) {
 		os.Exit(1)
 	}
 
-	g, err := odoid.NewOdoIDGenerator(odoid.GeneratorConfig{
-		Namespace: *ns,
-		Length:    *length,
-	})
-	if err != nil {
+	// Validate length before entering the loop.
+	if err := odoid.AssertLength(*length); err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)
 	}
+	capacity := odoid.Max[*length]
 
 	w := os.Stdout
 	for i := 0; i < *count; i++ {
-		r, err := g.Next()
+		n, err := randUint64n(capacity)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "error: %v\n", err)
+			fmt.Fprintf(os.Stderr, "error generating random number: %v\n", err)
 			os.Exit(1)
 		}
+		id, _ := odoid.Encode(n, *length) // capacity-bounded n never overflows
 		if *ids {
-			fmt.Fprintln(w, r.ID)
+			fmt.Fprintln(w, id)
 		} else {
-			ns := r.Namespace
-			if len(ns) > 20 {
-				ns = ns[:17] + "..."
+			label := *ns
+			if len(label) > 20 {
+				label = label[:17] + "..."
 			}
 			fmt.Fprintf(w, "%-*s  n=%-14d  length=%d  ns=%s\n",
-				r.Length, r.ID, r.N, r.Length, ns)
+				*length, id, n, *length, label)
 		}
 	}
 
 	if !*ids && *count > 1 {
 		fmt.Fprintf(w, "\n%d IDs generated  namespace=%s  length=%d\n",
-			*count, g.Namespace, g.Length)
+			*count, *ns, *length)
+	}
+}
+
+// randUint64n returns a cryptographically random uint64 in [0, max).
+func randUint64n(max uint64) (uint64, error) {
+	for {
+		var raw uint64
+		if err := binary.Read(rand.Reader, binary.BigEndian, &raw); err != nil {
+			return 0, err
+		}
+		// Rejection sampling to avoid modulo bias.
+		// threshold = (2^64 - max) % max  — values below threshold are biased.
+		threshold := (-max) % max
+		if raw >= threshold {
+			return raw % max, nil
+		}
 	}
 }
 

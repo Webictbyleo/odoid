@@ -8,6 +8,12 @@ func assertLength(length int) error {
 	return nil
 }
 
+// AssertLength is the exported form of assertLength for use by external tools
+// such as the CLI. Returns an *UnsupportedLengthError if length is not 6, 7, or 8.
+func AssertLength(length int) error {
+	return assertLength(length)
+}
+
 // Encode encodes the non-negative integer n into an OdoID string of the given length.
 //
 // length must be 6 (recommended default), 7, or 8.
