@@ -46,6 +46,11 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/Webictbyleo/odoid.git",
+    "directory": "ts"
+  },
+  "homepage": "https://github.com/Webictbyleo/odoid/tree/main/ts#readme",
+  "bugs": {
+    "url": "https://github.com/Webictbyleo/odoid/issues"
   }
 }

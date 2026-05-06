@@ -83,7 +83,7 @@ All three extend `RangeError`.
 
 ## Specification
 
-See [`../SPEC.md`](../SPEC.md) for the full processing instruction document.
+See [`SPEC.md`](https://github.com/Webictbyleo/odoid/blob/main/SPEC.md) for the full processing instruction document.
 
 ## License
 
