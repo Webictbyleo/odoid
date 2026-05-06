@@ -35,6 +35,7 @@ encode(236223201279, 8) →  "ZZ9ZZZZZ"
 | Rust | [`rust/`](rust/) | [![crates.io](https://img.shields.io/crates/v/odoid)](https://crates.io/crates/odoid) |
 | Lua | [`lua/`](lua/) | [![LuaRocks](https://img.shields.io/luarocks/v/webictbyleo/odoid)](https://luarocks.org/modules/webictbyleo/odoid) |
 | Java | [`java/`](java/) | [![Maven Central](https://img.shields.io/maven-central/v/io.github.webictbyleo/odoid)](https://central.sonatype.com/artifact/io.github.webictbyleo/odoid) |
+| PHP | [`php/`](php/) | [![Packagist](https://img.shields.io/packagist/v/webictbyleo/odoid)](https://packagist.org/packages/webictbyleo/odoid) |
 
 ## Specification
 
@@ -66,6 +67,124 @@ g.next(); // { id: "...", n: ..., length: 7, namespace: "orders" }
   const { encode, decode } = OdoID;
   console.log(encode(1234567n, 6)); // "0D7NM7"
 </script>
+```
+
+### Python
+
+```sh
+pip install odoid
+```
+
+```python
+from odoid import encode, decode, OdoIDGenerator
+
+encode(1234567, 6)   # "0D7NM7"
+decode("0D7NM7")     # 1234567
+
+g = OdoIDGenerator(namespace="orders", length=7)
+g.next()  # OdoIDResult(id="...", n=..., length=7, namespace="orders")
+```
+
+### Go
+
+```sh
+go get github.com/Webictbyleo/odoid/go/odoid
+```
+
+```go
+import "github.com/Webictbyleo/odoid/go/odoid"
+
+odoid.Encode(1234567, 6)  // "0D7NM7", nil
+odoid.Decode("0D7NM7")    // 1234567, nil
+
+g, _ := odoid.NewGenerator(odoid.Config{Namespace: "orders", Length: 7})
+g.Next() // &OdoIDResult{ID: "...", N: ..., Length: 7, Namespace: "orders"}
+```
+
+### C# / .NET
+
+```sh
+dotnet add package OdoID
+```
+
+```csharp
+using OdoID;
+
+OdoId.Encode(1234567, 6);  // "0D7NM7"
+OdoId.Decode("0D7NM7");    // 1234567
+
+var g = new OdoIDGenerator(new GeneratorConfig { Namespace = "orders", Length = 7 });
+g.Next(); // OdoIDResult { Id = "...", N = ..., Length = 7, Namespace = "orders" }
+```
+
+### Rust
+
+```toml
+[dependencies]
+odoid = "1.0.0"
+```
+
+```rust
+use odoid::{encode, decode, OdoIDGenerator, GeneratorConfig};
+
+encode(1234567, 6)?;  // "0D7NM7"
+decode("0D7NM7")?;    // 1234567u64
+
+let mut g = OdoIDGenerator::new(GeneratorConfig { namespace: "orders".into(), length: 7, ..Default::default() })?;
+g.next()?; // OdoIDResult { id: "...", n: ..., length: 7, namespace: "orders" }
+```
+
+### Lua
+
+```sh
+luarocks install odoid
+```
+
+```lua
+local odoid = require("odoid")
+
+odoid.encode(1234567, 6)  -- "0D7NM7"
+odoid.decode("0D7NM7")    -- 1234567
+
+local g = odoid.generator.new({ namespace = "orders", length = 7 })
+g:next()  -- { id = "...", n = ..., length = 7, namespace = "orders" }
+```
+
+### Java
+
+```xml
+<dependency>
+  <groupId>io.github.webictbyleo</groupId>
+  <artifactId>odoid</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+```java
+import io.github.webictbyleo.odoid.*;
+
+OdoId.encode(1234567, 6);  // "0D7NM7"
+OdoId.decode("0D7NM7");    // 1234567L
+
+var g = new OdoIDGenerator(GeneratorConfig.builder().namespace("orders").length(7).build());
+g.next(); // OdoIDResult { id = "...", n = ..., length = 7, namespace = "orders" }
+```
+
+### PHP
+
+```sh
+composer require webictbyleo/odoid
+```
+
+```php
+use Webictbyleo\OdoID\OdoId;
+use Webictbyleo\OdoID\OdoIDGenerator;
+
+OdoId::encode(1234567, 6);  // "0D7NM7"
+OdoId::decode("0D7NM7");    // 1234567
+
+$g = new OdoIDGenerator(namespace: 'orders', length: 7);
+$g->next(); // ['id' => '...', 'n' => ..., 'length' => 7, 'namespace' => 'orders']
 ```
 
 ## License
