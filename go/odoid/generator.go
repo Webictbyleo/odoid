@@ -117,3 +117,4 @@ func (g *OdoIDGenerator) Encode(n uint64) (string, error) {
 func (g *OdoIDGenerator) Decode(id string) (uint64, error) {
 	return Decode(id)
 }
+// Dependency test
