@@ -10,7 +10,7 @@ import (
 	"github.com/Webictbyleo/odoid/go/odoid"
 )
 
-const version = "1.0.3"
+const version = "1.0.4"
 
 const usage = `odoid — deterministic mixed-radix ID encoding
 
