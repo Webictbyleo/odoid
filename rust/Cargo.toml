@@ -1,6 +1,6 @@
 [package]
 name = "odoid"
-version = "1.0.1"
+version = "1.0.2"
 edition = "2021"
 authors = ["Webictbyleo"]
 description = "Deterministic mixed-radix ID encoding — maps integers to 6, 7, or 8-character alphanumeric strings. Ambiguous characters I, L, O are excluded."
