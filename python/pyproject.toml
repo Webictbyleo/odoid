@@ -35,7 +35,7 @@ Source        = "https://github.com/Webictbyleo/odoid/tree/main/python"
 packages = ["src/odoid"]
 
 [tool.hatch.build.targets.sdist]
-include = ["src/", "tests/", "README.md", "pyproject.toml"]
+include = ["src/", "README.md", "pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
