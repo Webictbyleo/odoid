@@ -4,7 +4,7 @@
 //! Run with: cargo test --release -- perf
 
 use std::time::Instant;
-use odoid::{decode, encode, MAX};
+use odoid::{decode, encode, MAX, OdoIDGenerator, GeneratorConfig};
 
 const LIMIT_MS: f64 = 0.1;
 const WARMUP: usize = 2_000;
@@ -19,6 +19,7 @@ fn assert_avg_ms(label: &str, mut f: impl FnMut()) {
         f();
     }
     let avg_ms = t.elapsed().as_secs_f64() * 1000.0 / ITERATIONS as f64;
+    println!("RESULT|rust|{label}|{avg_ms:.6}");
     assert!(
         avg_ms <= LIMIT_MS,
         "{label}: average {avg_ms:.4} ms exceeded spec limit of {LIMIT_MS} ms"
@@ -79,5 +80,16 @@ fn perf_decode_length8() {
     assert_avg_ms("decode/8", || {
         let _ = decode(ids[i % ids.len()]);
         i += 1;
+    });
+}
+
+#[test]
+fn perf_generator_next() {
+    let mut g = OdoIDGenerator::new(GeneratorConfig {
+        length: 6,
+        ..Default::default()
+    }).unwrap();
+    assert_avg_ms("generate/6", || {
+        let _ = g.next().unwrap();
     });
 }

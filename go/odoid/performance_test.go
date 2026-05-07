@@ -5,6 +5,7 @@
 package odoid_test
 
 import (
+	"fmt"
 	"testing"
 	"time"
 
@@ -27,6 +28,7 @@ func assertAvgMs(t *testing.T, label string, fn func()) {
 		fn()
 	}
 	avgMs := float64(time.Since(start).Nanoseconds()) / float64(perfIter) / 1e6
+	fmt.Printf("RESULT|go|%s|%.6f\n", label, avgMs)
 	if avgMs > perfLimitMs {
 		t.Errorf("%s: average %.4f ms exceeded spec limit of %.4f ms", label, avgMs, perfLimitMs)
 	}
@@ -80,6 +82,13 @@ func TestPerformanceDecodeLength8(t *testing.T) {
 	assertAvgMs(t, "decode/8", func() {
 		odoid.Decode(ids[i%len(ids)]) //nolint:errcheck
 		i++
+	})
+}
+
+func TestPerformanceGeneratorNext(t *testing.T) {
+	g, _ := odoid.NewOdoIDGenerator(odoid.GeneratorConfig{Length: 6})
+	assertAvgMs(t, "generate/6", func() {
+		g.Next() //nolint:errcheck
 	})
 }
 

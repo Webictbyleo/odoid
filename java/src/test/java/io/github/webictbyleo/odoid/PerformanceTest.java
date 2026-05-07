@@ -20,6 +20,7 @@ class PerformanceTest {
         long start = System.nanoTime();
         for (int i = 0; i < ITERATIONS; i++) fn.run();
         double avgMs = (System.nanoTime() - start) / 1_000_000.0 / ITERATIONS;
+        System.out.println(String.format("RESULT|java|%s|%.6f", label, avgMs));
 
         assertTrue(avgMs <= LIMIT_MS,
             String.format("%s: average %.4f ms exceeded spec limit of %.4f ms", label, avgMs, LIMIT_MS));
@@ -71,5 +72,11 @@ class PerformanceTest {
         String[] ids = {"0A000000", "ZZ9ZZZZZ", "1B3C4D5E", "AB000000"};
         int[] i = {0};
         assertAvgMs("decode/8", () -> OdoId.decode(ids[i[0]++ % ids.length]));
+    }
+
+    @Test
+    void generator_next_averageBelowLimit() {
+        OdoIDGenerator gen = new OdoIDGenerator(GeneratorConfig.builder().length(6).build());
+        assertAvgMs("generate/6", () -> gen.next());
     }
 }

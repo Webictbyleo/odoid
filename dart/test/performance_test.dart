@@ -18,6 +18,7 @@ void main() {
     }
     sw.stop();
     final avgMs = sw.elapsedMicroseconds / 1000 / iterations;
+    print('RESULT|dart|$label|${avgMs.toStringAsFixed(6)}');
     expect(
       avgMs,
       lessThanOrEqualTo(limitMs),
@@ -67,6 +68,11 @@ void main() {
       final ids = ['0A000000', 'ZZ9ZZZZZ', '1B3C4D5E', 'AB000000'];
       var i = 0;
       assertAvgMs('decode/8', () => OdoId.decode(ids[i++ % ids.length]));
+    });
+
+    test('generator next averages below $limitMs ms', () {
+      final gen = OdoIDGenerator(length: 6);
+      assertAvgMs('generate/6', () => gen.next());
     });
   });
 }

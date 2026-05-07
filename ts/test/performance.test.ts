@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { encode, decode } from "../src/index.js";
+import { encode, decode, OdoIDGenerator } from "../src/index.js";
 
 const LIMIT_MS = 0.1;
 const WARMUP = 2_000;
@@ -22,6 +22,7 @@ function measureAvg(fn: () => unknown, label: string): void {
   const t0 = performance.now();
   for (let i = 0; i < ITERATIONS; i++) fn();
   const avg = (performance.now() - t0) / ITERATIONS;
+  console.log(`RESULT|ts|${label}|${avg.toFixed(6)}`);
 
   expect(
     avg,
@@ -70,5 +71,10 @@ describe("Performance — each call ≤ 0.1000 ms (SPEC § 9)", () => {
     const ids = ["0A000000", "ZZ9ZZZZZ", "1B3C4D5E", "AB000000"];
     let i = 0;
     measureAvg(() => decode(ids[i++ % ids.length]), "decode/8");
+  });
+
+  test(`generator.next() length-6 — average of ${ITERATIONS.toLocaleString()} calls ≤ 0.1 ms`, () => {
+    const gen = new OdoIDGenerator({ length: 6 });
+    measureAvg(() => gen.next(), "generate/6");
   });
 });

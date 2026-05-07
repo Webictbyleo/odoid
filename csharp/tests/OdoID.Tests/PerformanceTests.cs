@@ -21,6 +21,7 @@ public class PerformanceTests
         sw.Stop();
 
         double avgMs = sw.Elapsed.TotalMilliseconds / Iterations;
+        Console.WriteLine($"RESULT|csharp|{label}|{avgMs:F6}");
         Assert.True(avgMs <= LimitMs,
             $"{label}: average {avgMs:F4} ms exceeded spec limit of {LimitMs} ms");
     }
@@ -80,5 +81,12 @@ public class PerformanceTests
         var ids = new[] { "0A000000", "ZZ9ZZZZZ", "1B3C4D5E", "AB000000" };
         int i = 0;
         AssertAvgMs("decode/8", () => { OdoId.Decode(ids[i++ % ids.Length]); });
+    }
+
+    [Fact]
+    public void Generator_Next_AverageBelowLimit()
+    {
+        var gen = new OdoIDGenerator(new GeneratorConfig { Length = 6 });
+        AssertAvgMs("generate/6", () => { gen.Next(); });
     }
 }

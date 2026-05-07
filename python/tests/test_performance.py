@@ -6,7 +6,7 @@ Each encode() / decode() call must average ≤ 0.1000 ms over a representative l
 import time
 
 import pytest
-from odoid import decode, encode
+from odoid import decode, encode, OdoIDGenerator
 
 LIMIT_MS = 0.1
 WARMUP = 2_000
@@ -26,6 +26,7 @@ def measure_avg(fn, label: str) -> None:
         fn()
     elapsed_ms = (time.perf_counter() - t0) * 1000
     avg_ms = elapsed_ms / ITERATIONS
+    print(f"RESULT|python|{label}|{avg_ms:.6f}")
 
     assert avg_ms <= LIMIT_MS, (
         f"{label}: average call time {avg_ms:.4f} ms exceeded "
@@ -93,3 +94,7 @@ class TestPerformance:
             return result
 
         measure_avg(fn, "decode/8")
+
+    def test_generator_next(self):
+        gen = OdoIDGenerator(length=6)
+        measure_avg(gen.next, "generate/6")
