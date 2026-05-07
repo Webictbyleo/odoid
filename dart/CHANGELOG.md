@@ -1,3 +1,13 @@
+## 1.0.5
+
+- Automated release bump to 1.0.5.
+
+## 1.0.4
+
+- Expanded DartDoc documentation for core classes, exceptions, and charsets.
+- Architectural context added to the mixed-radix encoding logic.
+- Synchronized with the monorepo modular release pipeline.
+
 ## 1.0.1
 
 - Fix: Changed default generator behavior from relative to absolute time to prevent deterministic generation in short-lived instances.
