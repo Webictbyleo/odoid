@@ -1,6 +1,6 @@
 name: odoid
 description: Deterministic mixed-radix ID encoding — maps integers to 6, 7, or 8-character alphanumeric strings. Ambiguous characters I, L, O excluded.
-version: 1.0.6
+version: 1.0.7
 homepage: https://github.com/Webictbyleo/odoid
 repository: https://github.com/Webictbyleo/odoid
 issue_tracker: https://github.com/Webictbyleo/odoid/issues
