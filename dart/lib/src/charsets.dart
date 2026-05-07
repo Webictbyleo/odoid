@@ -11,6 +11,9 @@ const String kNum = '0123456789';
 const String kAlpha = 'ABCDEFGHJKMNPQRSTVWXYZ';
 
 /// Full hybrid set — NUM concatenated with ALPHA — radix 32.
+///
+/// This set provides the high-capacity "bulk" of the ID. Position 0 and all
+/// positions from 3 onwards use this set.
 const String kAll = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
 /// Maximum exclusive value for each supported length.
@@ -24,12 +27,12 @@ const Map<int, int> kMax = {
 
 /// Returns the charset string for the given 0-based position index.
 ///
-/// | Position | Charset | Radix |
-/// |----------|---------|-------|
-/// | 0        | ALL     | 32    |
-/// | 1        | ALPHA   | 22    |
-/// | 2        | NUM     | 10    |
-/// | 3+       | ALL     | 32    |
+/// | Position | Charset | Radix | Purpose                               |
+/// |----------|---------|-------|---------------------------------------|
+/// | 0        | ALL     | 32    | High-capacity leading character       |
+/// | 1        | ALPHA   | 22    | Guarantees a letter at second place   |
+/// | 2        | NUM     | 10    | Guarantees a digit at third place     |
+/// | 3+       | ALL     | 32    | High-capacity trailing characters     |
 String charsetAt(int position) {
   return switch (position) {
     1 => kAlpha,

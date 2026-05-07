@@ -117,3 +117,4 @@ php_cs_fixer_cache
 scripts/
 Makefile
 .npmrc
+.odoid_bumped

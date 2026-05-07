@@ -27,6 +27,11 @@ final class OdoId {
 
   /// Encodes a non-negative integer [n] into an OdoID string of [length] chars.
   ///
+  /// This implements a mixed-radix encoding where different positions in the
+  /// output string use different base-radices (32, 22, and 10). This specific
+  /// arrangement ensures the output always "looks like" a serial number
+  /// (e.g., starts with a mix, then a letter, then a digit).
+  ///
   /// [length] must be 6 (default), 7, or 8.
   /// [n] must satisfy `0 <= n < kMax[length]`.
   ///
@@ -48,6 +53,11 @@ final class OdoId {
   }
 
   /// Decodes an OdoID string back to its originating integer.
+  ///
+  /// The decoding process reverses the mixed-radix positional logic. It is
+  /// case-insensitive during lookup but strictly enforces the positional
+  /// character sets. For example, a digit in position 1 (which requires
+  /// ALPHA) will throw an [InvalidCharacterException].
   ///
   /// Input is uppercased before lookup — lowercase letters that exist in the
   /// charset (e.g. `"0d7nm7"`) are accepted. The excluded characters I, L, O
