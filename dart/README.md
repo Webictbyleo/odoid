@@ -24,7 +24,7 @@ OdoId.decode('0D7NM7');         // 1234567
 
 ```yaml
 dependencies:
-  odoid: ^1.0.7
+  odoid: ^1.0.8
 ```
 
 ## Usage

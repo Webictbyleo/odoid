@@ -1,3 +1,8 @@
+## 1.0.8
+
+- chore: exclude test files and configuration from project distributions
+- feat: instrument cross-language performance tests with result reporting and add generator benchmark cases
+
 ## 1.0.7
 
 - Automated release bump to 1.0.7.

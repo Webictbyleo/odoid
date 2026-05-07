@@ -222,7 +222,7 @@ $g->next(); // ['id' => '...', 'n' => ..., 'length' => 7, 'namespace' => 'orders
 
 ```yaml
 dependencies:
-  odoid: ^1.0.1
+  odoid: ^1.0.8
 ```
 
 ```dart
