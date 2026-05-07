@@ -19,6 +19,7 @@ final class OdoIDResult {
   /// The namespace this generator belongs to.
   final String namespace;
 
+  /// Creates a new [OdoIDResult] instance.
   const OdoIDResult({
     required this.id,
     required this.n,

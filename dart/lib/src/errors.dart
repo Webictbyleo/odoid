@@ -3,9 +3,13 @@ library;
 
 /// Thrown when [n] >= MAX[length] for the chosen OdoID length.
 final class OdoOverflowException implements Exception {
+  /// The raw integer value that exceeded capacity.
   final int n;
+
+  /// The OdoID length (6, 7, or 8) associated with the overflow.
   final int length;
 
+  /// Creates a new [OdoOverflowException] instance.
   OdoOverflowException(this.n, this.length);
 
   @override
@@ -31,9 +35,13 @@ final class UnsupportedLengthException implements Exception {
 /// Thrown when a character absent from the positional charset is encountered
 /// during decoding.
 final class InvalidCharacterException implements Exception {
+  /// The invalid character encountered.
   final String char;
+
+  /// The 1-indexed position in the input string where [char] was found.
   final int position;
 
+  /// Creates a new [InvalidCharacterException] instance.
   InvalidCharacterException(this.char, this.position);
 
   @override
