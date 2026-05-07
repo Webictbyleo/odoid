@@ -1,6 +1,6 @@
 # OdoID — Processing Instruction Specification
 
-**Version:** 1.0.1  
+**Version:** 1.0.2
 **Date:** 2026-05-06  
 **Status:** Normative
 
