@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Automated release bump to 1.0.6.
+
 ## 1.0.5
 
 - Automated release bump to 1.0.5.
