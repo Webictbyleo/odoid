@@ -119,3 +119,4 @@ func (g *OdoIDGenerator) Decode(id string) (uint64, error) {
 }
 // Dependency test
 // Final test
+// Release pipeline test: cascading dependency trigger for CLI

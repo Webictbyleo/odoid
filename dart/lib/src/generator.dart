@@ -131,3 +131,4 @@ final class OdoIDGenerator {
 Never _assertLength(int length) =>
     throw UnsupportedLengthException(length);
 // Independent versioning test
+// Release pipeline test: automated versioning and dependency tracking
