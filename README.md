@@ -152,7 +152,7 @@ g.Next(); // OdoIDResult { Id = "...", N = ..., Length = 7, Namespace = "orders"
 
 ```toml
 [dependencies]
-odoid = "1.0.1"
+odoid = "1.0.3"
 ```
 
 ```rust
