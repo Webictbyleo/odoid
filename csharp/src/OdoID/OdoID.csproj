@@ -8,7 +8,7 @@
 
     <!-- NuGet package metadata -->
     <PackageId>OdoID</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>Webictbyleo</Authors>
     <Description>Deterministic mixed-radix ID encoding — maps integers to 6, 7, or 8-character alphanumeric strings. Ambiguous characters I, L, O are excluded.</Description>
     <PackageTags>id;encoding;mixed-radix;serial-number;deterministic</PackageTags>
