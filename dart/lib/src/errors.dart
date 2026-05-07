@@ -22,8 +22,10 @@ final class OdoOverflowException implements Exception {
 
 /// Thrown when a length other than 6, 7, or 8 is requested.
 final class UnsupportedLengthException implements Exception {
+  /// The unsupported length that was requested.
   final int length;
 
+  /// Creates a new [UnsupportedLengthException] instance with the given [length].
   UnsupportedLengthException(this.length);
 
   @override

@@ -7,7 +7,7 @@
 
   <groupId>io.github.webictbyleo</groupId>
   <artifactId>odoid</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <packaging>jar</packaging>
 
   <name>OdoID</name>
