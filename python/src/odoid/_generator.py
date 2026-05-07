@@ -1,6 +1,7 @@
 """OdoIDGenerator — distributed monotonic generator."""
 
 import time
+import os
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -71,6 +72,7 @@ class OdoIDGenerator:
         self.epoch = epoch if epoch is not None else 0
         self._sequence = 0
         self._last_tick = 0
+        self._salt = int.from_bytes(os.urandom(4), "big")
 
     def _now(self) -> int:
         return _now_ms() - self.epoch
@@ -88,8 +90,8 @@ class OdoIDGenerator:
             self._sequence = 0
             self._last_tick = tick
 
-        # FNV-1a hash of "namespace|tick", then XOR-shift PRNG
-        seed = _fnv1a32(f"{self.namespace}|{tick}")
+        # FNV-1a hash of "namespace|salt|tick", then XOR-shift PRNG
+        seed = _fnv1a32(f"{self.namespace}|{self._salt}|{tick}")
 
         seed ^= seed << 13
         seed ^= seed >> 7

@@ -39,6 +39,7 @@ public sealed class OdoIDGenerator
     public ulong Capacity { get; }
 
     private readonly long _epoch;
+    private readonly uint _salt;
     private ulong _sequence;
     private long _lastTick;
 
@@ -57,6 +58,7 @@ public sealed class OdoIDGenerator
         Length = config.Length;
         Capacity = Charsets.Max[Length];
         _epoch = config.Epoch;
+        _salt = (uint)System.Security.Cryptography.RandomNumberGenerator.GetInt32(int.MinValue, int.MaxValue);
     }
 
     private long NowMs() => DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - _epoch;
@@ -92,8 +94,8 @@ public sealed class OdoIDGenerator
             _lastTick = tick;
         }
 
-        // FNV-1a hash of "namespace|tick", then XOR-shift PRNG
-        ulong seed = Fnv1a32($"{Namespace}|{tick}");
+        // FNV-1a hash of "namespace|salt|tick", then XOR-shift PRNG
+        ulong seed = Fnv1a32($"{Namespace}|{_salt}|{tick}");
         seed ^= seed << 13;
         seed ^= seed >> 7;
         seed ^= seed << 17;

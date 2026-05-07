@@ -52,6 +52,7 @@ export class OdoIDGenerator {
   readonly capacity: bigint;
 
   private readonly epoch: bigint;
+  private readonly salt: number;
   private sequence: bigint = 0n;
   private lastTick: bigint = 0n;
 
@@ -65,6 +66,16 @@ export class OdoIDGenerator {
     this.length = length;
     this.capacity = MAX[length];
     this.epoch = BigInt(epoch);
+
+    const buf = new Uint32Array(1);
+    const _crypto = typeof crypto !== "undefined" ? crypto : (globalThis as any).crypto;
+    if (_crypto?.getRandomValues) {
+      _crypto.getRandomValues(buf);
+    } else {
+      // Fallback for environments where crypto is not global (e.g. Node 18 without flags)
+      buf[0] = (Math.floor(Math.random() * 0xffffffff) ^ Date.now()) >>> 0;
+    }
+    this.salt = buf[0];
   }
 
   private now(): bigint {
@@ -85,8 +96,8 @@ export class OdoIDGenerator {
       this.lastTick = tick;
     }
 
-    // FNV-1a hash of "namespace|tick", then XOR-shift PRNG
-    let seed = BigInt(fnv1a32(`${this.namespace}|${tick}`));
+    // FNV-1a hash of "namespace|salt|tick", then XOR-shift PRNG
+    let seed = BigInt(fnv1a32(`${this.namespace}|${this.salt}|${tick}`));
     seed ^= seed << 13n;
     seed ^= seed >> 7n;
     seed ^= seed << 17n;

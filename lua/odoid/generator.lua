@@ -26,6 +26,9 @@ local function now_ms()
   return math.floor(os.time() * 1000)
 end
 
+-- Seed the global PRNG for salt generation
+math.randomseed(os.time() + math.floor(os.clock() * 1000))
+
 --- Creates a new OdoIDGenerator.
 ---
 --- @param cfg table  Optional config:
@@ -49,6 +52,7 @@ function M.new(cfg)
     _epoch    = epoch,
     _sequence = 0,
     _last_tick = -1,
+    _salt = math.random(0, 0x7FFFFFFF),
   }
 
   --- Returns the next raw integer n in [0, capacity).
@@ -61,7 +65,7 @@ function M.new(cfg)
       self._last_tick = tick
     end
 
-    local key  = self.namespace .. "|" .. tostring(tick)
+    local key  = self.namespace .. "|" .. tostring(self._salt) .. "|" .. tostring(tick)
     local seed = fnv1a32(key)
     seed = seed ~ (seed << 13) & 0xFFFFFFFF
     seed = seed ~ (seed >> 7)

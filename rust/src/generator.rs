@@ -51,6 +51,7 @@ pub struct OdoIDGenerator {
     epoch: u64,
     sequence: u64,
     last_tick: u64,
+    salt: u32,
 }
 
 fn now_ms() -> u64 {
@@ -79,6 +80,11 @@ impl OdoIDGenerator {
     pub fn new(config: GeneratorConfig) -> Result<Self, UnsupportedLengthError> {
         assert_length(config.length)?;
         let epoch = config.epoch.unwrap_or(0);
+        
+        let mut b = [0u8; 4];
+        let _ = getrandom::getrandom(&mut b);
+        let salt = u32::from_be_bytes(b);
+
         Ok(Self {
             namespace: config.namespace,
             length: config.length,
@@ -86,6 +92,7 @@ impl OdoIDGenerator {
             epoch,
             sequence: 0,
             last_tick: 0,
+            salt,
         })
     }
 
@@ -105,7 +112,7 @@ impl OdoIDGenerator {
             self.last_tick = tick;
         }
 
-        let key = format!("{}|{}", self.namespace, tick);
+        let key = format!("{}|{}|{}", self.namespace, self.salt, tick);
         let mut seed = fnv1a32(&key);
         seed ^= seed << 13;
         seed ^= seed >> 7;

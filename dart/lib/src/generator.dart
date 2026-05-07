@@ -1,6 +1,7 @@
 /// OdoIDGenerator — distributed monotonic ID generator.
 library;
 
+import 'dart:math';
 import 'charsets.dart';
 import 'errors.dart';
 import 'odoid.dart';
@@ -55,6 +56,7 @@ final class OdoIDGenerator {
   final int capacity;
 
   final int _epoch;
+  final int _salt;
 
   int _sequence = 0;
   int _lastTick = -1;
@@ -72,6 +74,7 @@ final class OdoIDGenerator {
     // epoch defaults to 0 to ensure absolute time-based seeding (distributed uniqueness).
     int epoch = 0,
   })  : _epoch = epoch,
+        _salt = Random.secure().nextInt(0xFFFFFFFF),
         capacity = kMax[length] ?? _assertLength(length) {
     OdoId.assertLength(length);
   }
@@ -101,7 +104,7 @@ final class OdoIDGenerator {
       _lastTick = tick;
     }
 
-    var seed = _fnv1a32('$namespace|$tick');
+    var seed = _fnv1a32('$namespace|$_salt|$tick');
     seed ^= (seed << 13) & 0xFFFFFFFF;
     seed ^= (seed >> 7);
     seed ^= (seed << 17) & 0xFFFFFFFF;

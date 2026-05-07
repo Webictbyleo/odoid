@@ -14,3 +14,4 @@ rust-version = "1.65"
 readme = "README.md"
 
 [dependencies]
+getrandom = "0.2"

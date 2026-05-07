@@ -212,10 +212,11 @@ Result: **`1234567`**
 
 ### 7.2 Internal State
 
-| Field | Type | Initial Value |
-|-------|------|---------------|
-| `sequence` | uint64 | `0` |
-| `lastTick` | uint64 | `0` |
+| Field | Type | Initial Value | Description |
+|-------|------|---------------|-------------|
+| `sequence` | uint64 | `0` | Incremental counter for same-tick calls. |
+| `lastTick` | uint64 | `0` | Last millisecond timestamp processed. |
+| `instanceSalt` | uint32 | `random` | A cryptographically secure random 32-bit integer generated at construction. |
 
 ### 7.3 Hash Function
 
@@ -261,7 +262,7 @@ function nextN():
         sequence = 0
         lastTick = tick
 
-    seed = BigInt(hash(namespace + "|" + tick))
+    seed = BigInt(hash(namespace + "|" + instanceSalt + "|" + tick))
 
     // XOR-shift
     seed = seed XOR (seed << 13)

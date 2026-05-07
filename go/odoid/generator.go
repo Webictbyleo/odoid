@@ -1,6 +1,8 @@
 package odoid
 
 import (
+	"crypto/rand"
+	"encoding/binary"
 	"fmt"
 	"time"
 )
@@ -41,6 +43,7 @@ type OdoIDGenerator struct {
 	epoch    int64
 	sequence uint64
 	lastTick int64
+	salt     uint32
 }
 
 // NewOdoIDGenerator creates a new OdoIDGenerator from cfg.
@@ -58,11 +61,16 @@ func NewOdoIDGenerator(cfg GeneratorConfig) (*OdoIDGenerator, error) {
 
 	epoch := cfg.Epoch
 
+	var b [4]byte
+	_, _ = rand.Read(b[:])
+	salt := binary.BigEndian.Uint32(b[:])
+
 	return &OdoIDGenerator{
 		Namespace: cfg.Namespace,
 		Length:    cfg.Length,
 		Capacity:  Max[cfg.Length],
 		epoch:     epoch,
+		salt:      salt,
 	}, nil
 }
 
@@ -89,8 +97,8 @@ func (g *OdoIDGenerator) NextN() uint64 {
 		g.lastTick = tick
 	}
 
-	// FNV-1a hash of "namespace|tick", then XOR-shift PRNG
-	seed := fnv1a32(fmt.Sprintf("%s|%d", g.Namespace, tick))
+	// FNV-1a hash of "namespace|salt|tick", then XOR-shift PRNG
+	seed := fnv1a32(fmt.Sprintf("%s|%d|%d", g.Namespace, g.salt, tick))
 	seed ^= seed << 13
 	seed ^= seed >> 7
 	seed ^= seed << 17

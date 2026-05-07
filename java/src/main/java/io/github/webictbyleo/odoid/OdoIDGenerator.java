@@ -1,5 +1,6 @@
 package io.github.webictbyleo.odoid;
 
+import java.security.SecureRandom;
 import java.time.Instant;
 
 /**
@@ -20,6 +21,7 @@ public final class OdoIDGenerator {
 
     private long sequence = 0;
     private long lastTick = Long.MIN_VALUE;
+    private final long salt;
 
     /**
      * Creates a new {@link OdoIDGenerator} from {@code config}.
@@ -32,6 +34,7 @@ public final class OdoIDGenerator {
         this.length    = config.getLength();
         this.capacity  = Charsets.MAX.get(length);
         this.epoch     = config.getEpoch();
+        this.salt      = new SecureRandom().nextLong() & 0xFFFFFFFFL;
     }
 
     /** Creates a generator with default config (namespace="default", length=6). */
@@ -73,7 +76,7 @@ public final class OdoIDGenerator {
             lastTick = tick;
         }
 
-        long seed = fnv1a32(namespace + "|" + tick);
+        long seed = fnv1a32(namespace + "|" + salt + "|" + tick);
         seed ^= (seed << 13) & 0xFFFFFFFFL;
         seed ^= (seed >> 7);
         seed ^= (seed << 17) & 0xFFFFFFFFL;
