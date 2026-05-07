@@ -118,3 +118,4 @@ scripts/
 Makefile
 .npmrc
 .odoid_bumped*
+*.code-workspace
